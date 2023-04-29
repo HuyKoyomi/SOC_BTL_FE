@@ -1,0 +1,23 @@
+# Lý Mạnh Huy
+1. Một số câu lệnh
+    // base
+    + yarn create vite                                      : Create project
+    + yarn                                                  : Download thư viện
+    + yarn dev                                              : Start project       // điểm mạnh của vite là yarn dev chạy rất nhanh
+    
+    // install tailwindcss
+    + yarn add -D tailwindcss postcss autoprefixer          : Install tailwindcss
+    + npx tailwindcss init -p                                : Created Tailwind CSS config file: tailwind.config.js
+
+    // import thư viện fix bug
+    + npm install --save-dev sass
+
+2. Một số extension hỗ trợ
+    + Tailwind CSS IntelliSense
+    + PostCSS Language Support
+
+3. Cấu trúc dự án
+    + components    // lưu trữ code các chức năng
+    + app           // lưu chứ router, v...vite
+    + layout        // 
+    + vite.config.js     // quản lý path, port, v..v.. ( phải cấu hình jsconfig.json)
