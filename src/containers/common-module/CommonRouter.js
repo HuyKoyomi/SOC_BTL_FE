@@ -10,13 +10,5 @@ const CommonRoutes = [
     isPublic: true,
     exact: true,
   },
-  {
-    path: "/home",
-    name: "Home",
-    layout: MainLayout,
-    component: lazy(() => import("./Home")),
-    isPublic: true,
-    exact: true,
-  },
 ];
 export default CommonRoutes;

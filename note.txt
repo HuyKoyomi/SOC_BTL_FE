@@ -11,6 +11,8 @@
 
     // import thư viện fix bug
     + npm install --save-dev sass
+    + query-string
+    + jwt-decode
 
 2. Một số extension hỗ trợ
     + Tailwind CSS IntelliSense

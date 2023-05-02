@@ -1,24 +1,14 @@
-import { message } from "antd";
 import axios from "axios";
+import queryString from "query-string";
+import { TIME_OUT } from "./Contant";
 
-export async function AxiosAPI({ method, url, data = null }) {
-  let result = null;
-  try {
-    await axios({
-      method: method,
-      url: url,
-      data: data,
-    })
-      .then((res) => {
-        result = res.data;
-      })
-      .catch((err) => {
-        console.log("Somthing went wrong: ", err);
-        message.error("Lỗi gọi api hệ thống. Vui lòng reload lại trang web!");
-      });
-  } catch (error) {
-    console.log(error);
-  } finally {
-    return result;
-  }
-}
+const axiosAPI = axios.create({
+  baseURL: "http://localhost:8080", //import.meta.env.REACT_APP_API_BACKEND,
+  timeout: TIME_OUT,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  paramsSerializer: (params) => queryString.stringify(params),
+});
+
+export default axiosAPI;

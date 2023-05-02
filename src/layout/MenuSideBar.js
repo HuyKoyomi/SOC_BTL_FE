@@ -4,7 +4,7 @@
 
 const AdminMenu = [
   {
-    key: "/Quản lý khách sạn",
+    key: "/admin/home",
     label: "Quản lý khách sạn",
     icon: "",
     children: [

@@ -1,13 +1,13 @@
 import { message } from "antd";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginService from "../services/LoginService";
+import AM0101Service from "../services/AM0101Service";
 import UseCommon from "@core/hooks/UseCommon";
 import useAxiosAPI from "@core/hooks/UseAxiosAPI";
 import { ROLE_CONVERT } from "../views/Contant";
 
-export function CM01LoginDomain() {
-  const [context, contextService] = LoginService();
+export function AM0101Domain() {
+  const [context, contextService] = AM0101Service();
   const contextRef = useRef(context);
   const navigate = useNavigate();
   const common = UseCommon();
@@ -80,4 +80,4 @@ export function CM01LoginDomain() {
   return [context, domainInterface.current];
 }
 
-export default CM01LoginDomain;
+export default AM0101Domain;
