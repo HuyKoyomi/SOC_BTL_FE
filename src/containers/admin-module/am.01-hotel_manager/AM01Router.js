@@ -5,7 +5,7 @@ const AM01Router = [
   {
     path: "/admin/home",
     name: "Quản lý khách sạn",
-    layout: MainLayout,
+    layout: MainLayout, // sử dụng cho admin
     component: lazy(() => import("./AM0101List")),
     isPublic: true,
     exact: true,
@@ -14,7 +14,7 @@ const AM01Router = [
     path: "/admin/home/create",
     name: "Quản lý khách sạn - Tạo",
     layout: MainLayout,
-    component: lazy(() => import("./AM0101List")),
+    component: lazy(() => import("./AM.0102Create")),
     isPublic: true,
     exact: true,
   },

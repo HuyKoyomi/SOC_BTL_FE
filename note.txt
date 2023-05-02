@@ -13,6 +13,7 @@
     + npm install --save-dev sass
     + query-string
     + jwt-decode
+    + prop-types
 
 2. Một số extension hỗ trợ
     + Tailwind CSS IntelliSense
@@ -23,3 +24,9 @@
     + app           // lưu chứ router, v...vite
     + layout        // 
     + vite.config.js     // quản lý path, port, v..v.. ( phải cấu hình jsconfig.json)
+
+4. Các bước
+    1.  tạo components  // lưu code giao diện
+    2. containers   // cấu hình đường dẫn URL
+    3. AppRouters.js // lưu router
+    4. Cấu hình sidebar => layout/MenuSideBar.js

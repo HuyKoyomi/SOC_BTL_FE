@@ -9,7 +9,7 @@ const AdminMenu = [
     icon: "",
     children: [
       {
-        key: "/Thêm",
+        key: "/admin/home/create",
         icon: "",
         children: null,
         label: "Thêm",

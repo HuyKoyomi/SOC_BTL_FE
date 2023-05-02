@@ -11,6 +11,7 @@ export default defineConfig({
       "@containers": "/src/containers",
       "@assets": "/src/assets",
       "@core": "/src/core",
+      "@shared": "/src/shared",
     },
   },
   server: {

@@ -3,10 +3,11 @@ import UseCommon from "@core/hooks/UseCommon";
 import _ from "lodash";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import AM0101Service from "../services/AM0101Service";
+import AM0102Service from "../services/AM0102Service";
+import { message } from "antd";
 
-export function AM0101Domain() {
-  const [context, contextService] = AM0101Service();
+export function AM0102Domain() {
+  const [context, contextService] = AM0102Service();
   const contextRef = useRef(
     {
       listDataTable: null,
@@ -23,37 +24,16 @@ export function AM0101Domain() {
 
     await getDataTable();
   };
-  const getDataTable = async (
-    page = 0,
-    pageSize = 20,
-    params = {
-      hotelName: null,
-      address: null,
-    }
-  ) => {
+  const getDataTable = async (params) => {
     try {
       common?.backdrop(true); // tạo spin quay
-      const newParams = _.reduce(
-        params,
-        (result, value, key) => {
-          return _.assign(result, {
-            [key]: _.includes([NaN, null, undefined, ""], value) ? null : value,
-          });
-        },
-        {}
-      );
-      const url = `/admin/hotel/search?page=${page}&size=${pageSize}`;
-      const response = await axiosAPI.post(url, newParams);
+      const url = `/admin/hotel/create`;
+      const response = await axiosAPI.post(url, params);
       const { code, data } = response?.data || {};
       if (code === 200 && data) {
-        let listData = [];
-        _.map(data.content, (item, index) => {
-          listData.push(item.hotel);
-        });
-        contextRef.current.listDataTable = listData || [];
-        contextRef.current.listDataCount = data.totalElements || 0;
-        // update lại giá trị
-        await contextService.updateContext(contextRef.current);
+        goToHomePage();
+      } else {
+        message.error(response.data.message);
       }
       return data;
     } catch (error) {
@@ -63,20 +43,19 @@ export function AM0101Domain() {
     }
   };
   //------------------- navigation ----------------------
-  function goToViewPage(id) {
-    navigate(`/admin/home/${id}`);
+  function goToHomePage() {
+    navigate(`/admin/home`);
   }
   function goToCreatePage() {
     navigate(`/admin/home/create`);
   }
-
   const domainInterface = useRef({
     initDomain,
     getDataTable,
-    goToViewPage,
+    goToHomePage,
     goToCreatePage,
   });
   return [context, domainInterface.current];
 }
 
-export default AM0101Domain;
+export default AM0102Domain;
