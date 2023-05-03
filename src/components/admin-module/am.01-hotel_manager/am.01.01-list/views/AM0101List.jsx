@@ -1,7 +1,7 @@
-import { Button, Card, Input, Space, Table, Tooltip } from "antd";
-import { useEffect, useState } from "react";
-import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Button, Card, Input, Space, Table, Tooltip } from 'antd';
+import { useEffect, useState } from 'react';
+import { EyeOutlined, SearchOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function AM0101List({ context, domain }) {
   const { listDataTable, listDataCount } = context || {};
@@ -14,53 +14,53 @@ export default function AM0101List({ context, domain }) {
 
   const columns = [
     {
-      title: "STT",
-      dataIndex: "stt",
-      key: "stt",
-      fixed: "left",
+      title: 'STT',
+      dataIndex: 'stt',
+      key: 'stt',
+      fixed: 'left',
       width: 200,
       render: (record, value, index) => index + 1,
     },
     {
-      title: "Tên khách sạn",
-      dataIndex: "nameHotel",
-      key: "nameHotel",
+      title: 'Tên khách sạn',
+      dataIndex: 'nameHotel',
+      key: 'nameHotel',
       width: 300,
     },
     {
-      title: "Địa chỉ",
-      dataIndex: "address",
-      key: "address",
+      title: 'Địa chỉ',
+      dataIndex: 'address',
+      key: 'address',
       width: 300,
     },
     {
-      title: "Số điện thoại liên lạc",
-      dataIndex: "telephoneContact",
-      key: "telephoneContact",
+      title: 'Số điện thoại liên lạc',
+      dataIndex: 'telephoneContact',
+      key: 'telephoneContact',
       width: 300,
     },
     {
-      title: "Mô tả",
-      dataIndex: "describe",
-      key: "describe",
+      title: 'Mô tả',
+      dataIndex: 'describe',
+      key: 'describe',
       width: 300,
     },
     {
-      title: "Người quản lý",
-      dataIndex: "nameBankAccount",
-      key: "nameBankAccount",
+      title: 'Người quản lý',
+      dataIndex: 'nameBankAccount',
+      key: 'nameBankAccount',
       width: 300,
     },
     {
-      title: "Tình trạng",
-      dataIndex: "status",
-      key: "status",
+      title: 'Tình trạng',
+      dataIndex: 'status',
+      key: 'status',
       width: 300,
     },
     {
-      title: "Action",
-      key: "action",
-      fixed: "right",
+      title: 'Action',
+      key: 'action',
+      fixed: 'right',
       width: 200,
       render: (_, record, index) => (
         <Tooltip
@@ -70,7 +70,7 @@ export default function AM0101List({ context, domain }) {
             domain.goToViewPage(record.id);
           }}
         >
-          <a style={{ color: "#1677ff" }}>
+          <a style={{ color: '#1677ff' }}>
             <EyeOutlined />
           </a>
         </Tooltip>
@@ -94,14 +94,14 @@ export default function AM0101List({ context, domain }) {
                   entry?.nameHotel
                     ?.toLowerCase()
                     .includes(currValue.toLowerCase()) ||
-                  entry?.telephoneContact.includes(currValue.toLowerCase())
+                  entry?.telephoneContact.includes(currValue.toLowerCase()),
               );
               setData(filteredData);
             }}
           />
           <Button
             className="text-cyan-1 bg-blue-6"
-            onClick={(e) => navigate("/admin/home/create")}
+            onClick={(e) => domain.goToCreatePage()}
           >
             Thêm mới
           </Button>

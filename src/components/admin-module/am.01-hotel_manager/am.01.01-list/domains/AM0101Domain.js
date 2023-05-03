@@ -25,7 +25,7 @@ export function AM0101Domain() {
   };
   const getDataTable = async (
     page = 0,
-    pageSize = 20,
+    pageSize = 1000000,
     params = {
       hotelName: null,
       address: null,
@@ -67,7 +67,7 @@ export function AM0101Domain() {
     navigate(`/admin/home/view/${id}`);
   };
   const goToCreatePage = () => {
-    navigate(`/admin/home/create`);
+    navigate(`/admin/home/${'create'}/${null}`);
   };
 
   const domainInterface = useRef({

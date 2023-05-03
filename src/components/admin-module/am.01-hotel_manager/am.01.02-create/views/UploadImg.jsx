@@ -1,6 +1,6 @@
-import { PlusOutlined } from "@ant-design/icons";
-import { Form, Modal, Upload } from "antd";
-import { useState } from "react";
+import { PlusOutlined } from '@ant-design/icons';
+import { Form, Modal, Upload } from 'antd';
+import { useState } from 'react';
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -9,18 +9,10 @@ const getBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
-const UploadImg = ({ name }) => {
+const UploadImg = ({ name, fileList, setFileList }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([
-    // {
-    //   uid: "-1",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    // },
-  ]);
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -29,11 +21,11 @@ const UploadImg = ({ name }) => {
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
     setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+      file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
     );
   };
   const handleChange = ({ fileList: newFileList }) => {
-    console.log("newFileList", newFileList);
+    console.log('newFileList', newFileList);
     setFileList(newFileList);
   };
   const uploadButton = (
@@ -56,12 +48,12 @@ const UploadImg = ({ name }) => {
             <Form.Item
               name={name}
               valuePropName={name}
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Trường thông tin không được phép để trống!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: 'Trường thông tin không được phép để trống!',
+                },
+              ]}
             >
               <Upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -94,7 +86,7 @@ const UploadImg = ({ name }) => {
         <img
           alt="example"
           style={{
-            width: "100%",
+            width: '100%',
           }}
           src={previewImage}
         />

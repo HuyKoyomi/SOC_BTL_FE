@@ -1,9 +1,39 @@
 import { HOTEL_STATUS } from '@components/admin-module/Contant';
 import { Button, Card, Col, Form, Input, Row, Select } from 'antd';
+import { useUpdateEffect } from 'react-use';
 import UploadImg from './UploadImg';
+import { useState } from 'react';
+import _ from 'lodash';
 
 export default function AM0102List({ context, domain }) {
   const [form] = Form.useForm();
+  const { mode, dataDetail } = context || {};
+  const [fileList, setFileList] = useState([]);
+  useUpdateEffect(() => {
+    if (mode == 'view' || mode == 'edit') {
+      const { hotel, imageStoreLink } = dataDetail || {};
+      form.setFieldsValue({
+        nameHotel: hotel?.nameHotel,
+        address: hotel?.address,
+        describe: hotel?.describe,
+        nameBankAccount: hotel?.nameBankAccount,
+        numberBankAccount: hotel?.numberBankAccount,
+        status: hotel?.status,
+        telephoneContact: hotel?.telephoneContact,
+        files: imageStoreLink,
+      });
+      let arr = [];
+      _.map(imageStoreLink, (item, index) => {
+        arr.push({
+          uid: item?.id,
+          name: item?.fileName,
+          status: 'done',
+          url: item?.fileUrl,
+        });
+      });
+      setFileList(arr);
+    }
+  }, [dataDetail]);
 
   const required = {
     required: true,
@@ -19,11 +49,21 @@ export default function AM0102List({ context, domain }) {
 
   return (
     <Card
-      title="Thêm mới khách sạn"
+      title={
+        mode == 'create'
+          ? 'Thêm mới khách sạn'
+          : mode == 'view'
+          ? 'Xem chi tiết khách sạn'
+          : 'Chỉnh sửa khách sạn'
+      }
       actions={[
         <Button
           onClick={(e) => {
-            domain.goToHomePage();
+            if (mode == 'view' || mode == 'create') {
+              domain.goBack();
+            } else if (mode == 'edit') {
+              domain.goToViewPage();
+            }
           }}
           key={1}
         >
@@ -32,11 +72,19 @@ export default function AM0102List({ context, domain }) {
         <Button
           className="text-cyan-1 bg-blue-6"
           onClick={(e) => {
-            create();
+            if (mode == 'view') {
+              domain.goToEditPage();
+            } else if (mode == 'create') {
+              create();
+            }
           }}
           key={2}
         >
-          Thêm mới
+          {mode == 'create'
+            ? 'Thêm mới'
+            : mode == 'view'
+            ? 'Chỉnh sửa'
+            : 'Xác nhận chỉnh sửa'}
         </Button>,
       ]}
     >
@@ -58,6 +106,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item
@@ -69,6 +118,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item label="Trạng thái:" name="status" rules={[required]}>
@@ -77,6 +127,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Chọn thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item
@@ -88,6 +139,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item
@@ -99,6 +151,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item label="Mô tả:" name="describe" rules={[required]}>
@@ -106,6 +159,7 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
             <Form.Item label="Địa chỉ" name="address" rules={[required]}>
@@ -113,9 +167,14 @@ export default function AM0102List({ context, domain }) {
                 className="w-full"
                 allowClear={true}
                 placeholder="Nhập thông tin"
+                disabled={mode == 'view' ? true : false}
               />
             </Form.Item>
-            <UploadImg name={'files'} />
+            <UploadImg
+              name={'files'}
+              fileList={fileList}
+              setFileList={setFileList}
+            />
           </Col>
         </Row>
       </Form>

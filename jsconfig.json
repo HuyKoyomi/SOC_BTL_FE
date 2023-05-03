@@ -9,6 +9,7 @@
       "@store/*": ["store/*"],
       "@layout/*": ["layout/*"],
       "@containers/*": ["containers/*"],
+      "@common/*":["common/*"],
     }
   },
   "include": ["src"]

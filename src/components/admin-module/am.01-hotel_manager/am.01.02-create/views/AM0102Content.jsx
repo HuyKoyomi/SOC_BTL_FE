@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import AM0102Domain from "../domains/AM0102Domain";
-import AM0102List from "./AM0102Create";
-import { Col, Row } from "antd";
-
+import { Col } from 'antd';
+import { useEffect } from 'react';
+import AM0102Domain from '../domains/AM0102Domain';
+import AM0102List from './AM0102Create';
 export function AM0102Content() {
   // gọi
   const [context, domain] = AM0102Domain();
