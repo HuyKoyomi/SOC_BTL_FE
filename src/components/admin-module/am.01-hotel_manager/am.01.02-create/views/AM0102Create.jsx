@@ -46,6 +46,12 @@ export default function AM0102List({ context, domain }) {
     await form.validateFields();
     await domain.create(params);
   }
+  async function edit() {
+    let params = await form.getFieldsValue(true);
+    console.log('params', params);
+    await form.validateFields();
+    await domain.edit(params);
+  }
 
   return (
     <Card
@@ -76,6 +82,8 @@ export default function AM0102List({ context, domain }) {
               domain.goToEditPage();
             } else if (mode == 'create') {
               create();
+            } else if (mode == 'edit') {
+              edit();
             }
           }}
           key={2}
@@ -174,6 +182,7 @@ export default function AM0102List({ context, domain }) {
               name={'files'}
               fileList={fileList}
               setFileList={setFileList}
+              mode={mode}
             />
           </Col>
         </Row>

@@ -90,6 +90,53 @@ export function AM0102Domain() {
       common?.backdrop(false);
     }
   };
+  const edit = async (params) => {
+    try {
+      common?.backdrop(true); // tạo spin quay
+      let dataTMP = {
+        id: parseInt(id),
+        nameHotel: params?.nameHotel,
+        address: params?.address,
+        status: params?.status,
+        describe: params?.describe,
+        telephoneContact: params?.telephoneContact,
+        numberBankAccount: params?.numberBankAccount,
+        nameBankAccount: params?.nameBankAccount,
+        imgDelete: [],
+      };
+      console.log('dataTMP', dataTMP);
+      const formData = new FormData();
+      formData.append('hotelRequest', JSON.stringify(dataTMP));
+      let listFile = params?.files || [];
+      if (listFile && listFile?.length !== 0) {
+        _.map(listFile, (item) => {
+          formData.append('files', item);
+        });
+      } else {
+        formData.append('files', null);
+      }
+      const url = `/admin/hotel/update`;
+      const response = await axiosAPI.post(url, formData, {
+        //sử dụng trong TH dùng form-data + multipart
+        responseType: 'blob',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response?.status === 200) {
+        message.success('Cập nhật thành công');
+        goToHomePage();
+      } else {
+        message.error('Cập nhật thất bại');
+      }
+      return data;
+    } catch (error) {
+      console.log(error);
+      message.error('Cập nhật thất bại');
+    } finally {
+      common?.backdrop(false);
+    }
+  };
   async function goToEditPage() {
     contextRef.current.mode = 'edit';
     await contextService.updateContext(contextRef.current);
@@ -112,6 +159,7 @@ export function AM0102Domain() {
     goToViewPage,
     goBack,
     create,
+    edit,
   });
   return [context, domainInterface.current];
 }

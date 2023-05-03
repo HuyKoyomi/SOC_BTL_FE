@@ -34,11 +34,13 @@ export function CM01LoginDomain() {
         sessionStorage.setItem('access_token', accessToken);
         message.success('Đăng nhập thành công');
         await getUserLogin();
-      } else {
-        message.error('Tên đăng nhập hoặc mật khẩu không chính xác');
       }
+      // else {
+      //   message.error('Tên đăng nhập hoặc mật khẩu không chính xác');
+      // }
     } catch (error) {
       console.log(error);
+      message.error('Tên đăng nhập hoặc mật khẩu không chính xác');
     } finally {
       common?.backdrop(false);
     }
