@@ -1,25 +1,19 @@
-import { HOTEL_STATUS } from "@components/admin-module/Contant";
-import { Button, Card, Col, Form, Input, Row, Select } from "antd";
-import { useEffect, useState } from "react";
-// import AM0102UploadFile from "./AM0102UploadFile";
+import { HOTEL_STATUS } from '@components/admin-module/Contant';
+import { Button, Card, Col, Form, Input, Row, Select } from 'antd';
+import UploadImg from './UploadImg';
 
 export default function AM0102List({ context, domain }) {
-  const { listDataTable, listDataCount } = context || {};
-  const [data, setData] = useState(listDataTable);
   const [form] = Form.useForm();
 
-  useEffect(() => {
-    setData(context?.listDataTable);
-  }, [context?.listDataTable]);
-
   const required = {
-    required: "true",
-    message: "Trường thông tin không được phép để trống",
+    required: true,
+    message: 'Trường thông tin không được phép để trống',
   };
 
   async function create() {
-    await form.validateFields();
     let params = await form.getFieldsValue(true);
+    console.log('params', params);
+    await form.validateFields();
     await domain.create(params);
   }
 
@@ -49,7 +43,7 @@ export default function AM0102List({ context, domain }) {
       <Form
         labelCol={{ span: 6 }}
         layout="horizontal"
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         title="Form"
         form={form}
       >
@@ -121,7 +115,7 @@ export default function AM0102List({ context, domain }) {
                 placeholder="Nhập thông tin"
               />
             </Form.Item>
-            {/* <AM0102UploadFile context={context} domain={domain} /> */}
+            <UploadImg name={'files'} />
           </Col>
         </Row>
       </Form>

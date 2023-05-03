@@ -1,11 +1,11 @@
-import axiosAPI from "@core/common/AxiosAPI";
-import { message } from "antd";
-import _ from "lodash";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import UseCommon from "./UseCommon";
-import useRefreshToken from "./UseRefreshToken";
-import jwt_decode from "jwt-decode";
+import axiosAPI from '@core/common/AxiosAPI';
+import { message } from 'antd';
+import jwt_decode from 'jwt-decode';
+import _ from 'lodash';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UseCommon from './UseCommon';
+import useRefreshToken from './UseRefreshToken';
 
 const useAxiosAPI = () => {
   const navigate = useNavigate();
@@ -15,14 +15,15 @@ const useAxiosAPI = () => {
   useEffect(() => {
     const requestInterceptor = axiosAPI.interceptors.request.use(
       (config) => {
+        console.log('call api');
         checkHistoryURL();
         // Thêm headers
         if (!config.headers) {
           config.headers = {};
         }
         // Thêm xác thực
-        if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${
+        if (!config.headers['Authorization']) {
+          config.headers['Authorization'] = `Bearer ${
             sessionStorage[`access_token`]
           }`;
         }
@@ -43,7 +44,7 @@ const useAxiosAPI = () => {
                 [key]: value && _.isString(value) ? value.trim() : value,
               });
             },
-            {}
+            {},
           );
         }
         // Cookie
@@ -52,7 +53,7 @@ const useAxiosAPI = () => {
         config.maxBodyLength = 1000000000;
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     const responseInterceptor = axiosAPI.interceptors.response.use(
@@ -63,26 +64,26 @@ const useAxiosAPI = () => {
         let isExpToken = checkExpiredToken();
         if (isExpToken) {
           // Kiểm tra - lấy lại Refresh Token
-          console.log("400 refresh token::");
+          console.log('400 refresh token::');
           // Dùng refresh token để lấy access token
           if (!prevRequest?.sent) {
             prevRequest.sent = true;
             try {
               const newAccessToken = await refreshToken();
-              prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+              prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
             } catch (error) {
-              console.log(error, "error");
+              console.log(error, 'error');
             }
             return axiosAPI(prevRequest);
           }
           // Refresh token hết hạn
-          message.info("Phiên đăng nhập đã hết hạn");
+          message.info('Phiên đăng nhập đã hết hạn');
           common?.backdrop(false);
           sessionStorage.clear();
-          return navigate("/");
+          return navigate('/');
         }
         return Promise.reject(error);
-      }
+      },
     );
 
     return () => {
@@ -91,9 +92,22 @@ const useAxiosAPI = () => {
     };
   }, []);
 
+  function checkHistoryURL() {
+    // nếu chưa có accessToken là chưa đăng nhập -> bắt đăng nhập
+    // đăng nhập xong sẽ điều hướng về trang cũ
+    let accessToken = sessionStorage.getItem('access_token');
+    if (!accessToken) {
+      if (window.location.pathname !== '/') {
+        let params = getAllUrlParams(window.location.href);
+        sessionStorage.setItem('prev_url', window.location.pathname);
+        sessionStorage.setItem('telegram_type', params?.telegramType);
+        window.location.assign('http://localhost:8080');
+      }
+    }
+  }
   function checkExpiredToken() {
     // Lấy token decode kiểm tra expired chưa
-    let accessToken = sessionStorage.getItem("access_token");
+    let accessToken = sessionStorage.getItem('access_token');
     if (accessToken) {
       const decodedToken = jwt_decode(accessToken);
       // Kiểm tra token có còn hạn không - so với ngày hiện tại
@@ -103,28 +117,15 @@ const useAxiosAPI = () => {
     }
     return false;
   }
-  function checkHistoryURL() {
-    // nếu chưa có accessToken là chưa đăng nhập -> bắt đăng nhập
-    // đăng nhập xong sẽ điều hướng về trang cũ
-    let accessToken = sessionStorage.getItem("access_token");
-    if (!accessToken) {
-      if (window.location.pathname !== "/") {
-        let params = getAllUrlParams(window.location.href);
-        sessionStorage.setItem("prev_url", window.location.pathname);
-        sessionStorage.setItem("telegram_type", params?.telegramType);
-        // window.location.assign(process.env.REACT_APP_DOMAIN);
-      }
-    }
-  }
 
   return axiosAPI;
 };
 export default useAxiosAPI;
 
 function getAllUrlParams(url) {
-  console.log("url", url);
+  console.log('url', url);
   // get query string from url (optional) or window
-  let queryString = url ? url.split("?")[1] : window.location.search.slice(1);
+  let queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
   // we'll store the parameters here
   let obj = {};
@@ -132,18 +133,18 @@ function getAllUrlParams(url) {
   // if query string exists
   if (queryString) {
     // stuff after # is not part of query string, so get rid of it
-    queryString = queryString.split("#")[0];
+    queryString = queryString.split('#')[0];
 
     // split our query string into its component parts
-    let arr = queryString.split("&");
+    let arr = queryString.split('&');
 
     for (const element of arr) {
       // separate the keys and the values
-      let a = element.split("=");
+      let a = element.split('=');
 
       // set parameter name and value (use 'true' if empty)
       let paramName = a[0];
-      let paramValue = typeof a[1] === "undefined" ? true : a[1];
+      let paramValue = typeof a[1] === 'undefined' ? true : a[1];
 
       // (optional) keep case consistent
       //   paramName = paramName.toLowerCase();
@@ -152,7 +153,7 @@ function getAllUrlParams(url) {
       // if the paramName ends with square brackets, e.g. colors[] or colors[2]
       if (paramName.match(/\[(\d+)?\]$/)) {
         // create key if it doesn't exist
-        let key = paramName.replace(/\[(\d+)?\]/, "");
+        let key = paramName.replace(/\[(\d+)?\]/, '');
         if (!obj[key]) {
           obj[key] = [];
         }
@@ -171,7 +172,7 @@ function getAllUrlParams(url) {
         if (!obj[paramName]) {
           // if it doesn't exist, create property
           obj[paramName] = paramValue;
-        } else if (obj[paramName] && typeof obj[paramName] === "string") {
+        } else if (obj[paramName] && typeof obj[paramName] === 'string') {
           // if property does exist and it's a string, convert it to an array
           obj[paramName] = [obj[paramName]];
           obj[paramName].push(paramValue);

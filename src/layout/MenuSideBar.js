@@ -7,20 +7,6 @@ const AdminMenu = [
     key: "/admin/home",
     label: "Quản lý khách sạn",
     icon: "",
-    children: [
-      {
-        key: "/admin/home/create",
-        icon: "",
-        children: null,
-        label: "Thêm",
-      },
-      {
-        key: "/Sửa",
-        icon: "",
-        children: null,
-        label: "Sửa",
-      },
-    ],
   },
   {
     key: "/Quản lý loại phòng",

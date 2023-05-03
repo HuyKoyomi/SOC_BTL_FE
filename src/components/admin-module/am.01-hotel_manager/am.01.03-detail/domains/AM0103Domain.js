@@ -3,10 +3,10 @@ import UseCommon from '@core/hooks/UseCommon';
 import _ from 'lodash';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AM0101Service from '../services/AM0101Service';
+import AM0103Service from '../services/AM0103Service';
 
-export function AM0101Domain() {
-  const [context, contextService] = AM0101Service();
+export function AM0103Domain() {
+  const [context, contextService] = AM0103Service();
   const contextRef = useRef(
     {
       listDataTable: null,
@@ -64,7 +64,7 @@ export function AM0101Domain() {
   };
   //------------------- navigation ----------------------
   const goToViewPage = (id) => {
-    navigate(`/admin/home/view/${id}`);
+    navigate(`/admin/home/${id}`);
   };
   const goToCreatePage = () => {
     navigate(`/admin/home/create`);
@@ -79,4 +79,4 @@ export function AM0101Domain() {
   return [context, domainInterface.current];
 }
 
-export default AM0101Domain;
+export default AM0103Domain;

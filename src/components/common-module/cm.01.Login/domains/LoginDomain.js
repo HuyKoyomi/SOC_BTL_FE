@@ -1,10 +1,10 @@
-import { message } from "antd";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import LoginService from "../services/LoginService";
-import UseCommon from "@core/hooks/UseCommon";
-import useAxiosAPI from "@core/hooks/UseAxiosAPI";
-import { ROLE_CONVERT } from "../views/Contant";
+import { message } from 'antd';
+import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LoginService from '../services/LoginService';
+import UseCommon from '@core/hooks/UseCommon';
+import useAxiosAPI from '@core/hooks/UseAxiosAPI';
+import { ROLE_CONVERT } from '../views/Contant';
 
 export function CM01LoginDomain() {
   const [context, contextService] = LoginService();
@@ -31,11 +31,11 @@ export function CM01LoginDomain() {
       });
       const { accessToken } = response?.data || {};
       if (accessToken) {
-        sessionStorage.setItem("access_token", accessToken);
-        message.success("Đăng nhập thành công");
+        sessionStorage.setItem('access_token', accessToken);
+        message.success('Đăng nhập thành công');
         await getUserLogin();
       } else {
-        message.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+        message.error('Tên đăng nhập hoặc mật khẩu không chính xác');
       }
     } catch (error) {
       console.log(error);
@@ -52,13 +52,13 @@ export function CM01LoginDomain() {
       const response = await axiosAPI.get(url);
       let { data, code } = response?.data || {};
       if (code == 200 && data) {
-        sessionStorage.setItem("role", data?.role);
+        sessionStorage.setItem('role', data?.role);
         switch (data?.role) {
           case ROLE_CONVERT.USER:
-            navigate("/user/home");
+            navigate('/user/home');
             break;
           case ROLE_CONVERT.ADMIN:
-            navigate("/admin/home");
+            navigate('/admin/home');
             break;
           default:
             localStorage.clear();

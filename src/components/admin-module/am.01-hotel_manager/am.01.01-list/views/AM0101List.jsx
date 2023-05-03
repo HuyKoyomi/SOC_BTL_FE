@@ -1,10 +1,12 @@
 import { Button, Card, Input, Space, Table, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 export default function AM0101List({ context, domain }) {
   const { listDataTable, listDataCount } = context || {};
   const [data, setData] = useState(listDataTable);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setData(context?.listDataTable);
@@ -99,9 +101,7 @@ export default function AM0101List({ context, domain }) {
           />
           <Button
             className="text-cyan-1 bg-blue-6"
-            onClick={(e) => {
-              domain.goToCreatePage();
-            }}
+            onClick={(e) => navigate("/admin/home/create")}
           >
             Thêm mới
           </Button>
