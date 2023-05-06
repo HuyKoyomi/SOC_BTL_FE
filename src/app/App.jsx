@@ -1,7 +1,7 @@
-import _ from "lodash";
-import { Suspense, useMemo } from "react";
-import { Route, Routes } from "react-router-dom";
-import routes from "./AppRouters";
+import _ from 'lodash';
+import { Suspense, useMemo } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import routes from './AppRouters';
 
 export default function App() {
   return useMemo(() => {
@@ -32,5 +32,5 @@ export default function App() {
         </Routes>
       </Suspense>
     );
-  });
+  }, []);
 }

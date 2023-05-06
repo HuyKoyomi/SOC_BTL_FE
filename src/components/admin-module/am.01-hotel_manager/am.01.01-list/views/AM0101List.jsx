@@ -77,6 +77,7 @@ export default function AM0101List({ context, domain }) {
       ),
     },
   ];
+
   return (
     <Card
       title="Quản lý khách sạn"
@@ -108,7 +109,7 @@ export default function AM0101List({ context, domain }) {
         </Space>
       }
     >
-      <Table columns={columns} dataSource={data} />;
+      <Table columns={columns} dataSource={data} />
     </Card>
   );
 }

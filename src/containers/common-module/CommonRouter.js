@@ -1,12 +1,11 @@
-import MainLayout from "@layout/MainLayout";
-import { lazy } from "react";
+import LoginContent from './Login';
 
 const CommonRoutes = [
   {
-    path: "/",
-    name: "Đăng nhập",
+    path: '/',
+    name: 'Đăng nhập',
     layout: null,
-    component: lazy(() => import("./Login")),
+    component: LoginContent,
     isPublic: true,
     exact: true,
   },
