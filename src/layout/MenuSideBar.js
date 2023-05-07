@@ -9,7 +9,7 @@ const AdminMenu = [
     icon: '',
   },
   {
-    key: '/Quản lý loại phòng',
+    key: '/room-type',
     icon: '',
     children: null,
     label: 'Quản lý loại phòng',

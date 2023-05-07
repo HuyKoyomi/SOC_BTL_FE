@@ -1,14 +1,14 @@
-import { Progress, Spin } from "antd";
-import React, { useState } from "react";
+import { Spin } from 'antd';
+import React, { useState } from 'react';
 
 const CommonContext = React.createContext(null);
 
 export const CommonProvider = ({ children }) => {
   const [isOpenBackdrop, setOpenBackdrop] = useState(false);
   const [isCountBackdrop, setCountBackdrop] = useState(false);
-  const [backdropMessage, setBackdropMessage] = useState("");
+  const [backdropMessage, setBackdropMessage] = useState('');
 
-  const backdrop = (isOpen = false, isCount = false, message = "") => {
+  const backdrop = (isOpen = false, isCount = false, message = '') => {
     setOpenBackdrop(isOpen);
     setCountBackdrop(isCount);
     if (message) {
@@ -33,7 +33,7 @@ export const CommonProvider = ({ children }) => {
             <div>Vui lòng đợi trong giây lát phút! 🥰🥰🥰</div>
           </>
         }
-        size={"large"}
+        size={'large'}
       >
         <CommonContext.Provider value={value}>
           {children}

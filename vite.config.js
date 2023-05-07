@@ -13,6 +13,7 @@ export default defineConfig({
       "@core": "/src/core",
       "@shared": "/src/shared",
       "@common": "/src/common",
+      src: "/src",
     },
   },
   server: {

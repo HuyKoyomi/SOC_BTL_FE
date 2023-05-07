@@ -1,29 +1,29 @@
-import React, { createContext, useReducer, useContext } from "react";
-import log from "./ModuleLogger";
-const tag = "Store";
+import { createContext, useContext, useReducer } from 'react';
+import log from './ModuleLogger';
+const tag = 'Store';
 
 const storeContext = createContext();
 const dispatchContext = createContext();
 
 let actions = {
-  "/CREATE_SLICE": (state, payload) => {
-    log.trace(tag, "CREATE_SLICE", payload);
+  '/CREATE_SLICE': (state, payload) => {
+    log.trace(tag, 'CREATE_SLICE', payload);
     return { ...state, ...payload };
   },
 };
 
 const reducer = (state, action) => {
-  log.trace(tag, "reducer action", action);
+  log.trace(tag, 'reducer action', action);
 
-  if (action.type == "CREATE_SLICE") {
+  if (action.type == 'CREATE_SLICE') {
     let payload = {};
     payload[action.slice] = action.data;
-    return actions["/CREATE_SLICE"](state, payload);
+    return actions['/CREATE_SLICE'](state, payload);
   }
   try {
     return actions[action.type](state, action);
   } catch (error) {
-    log.trace(tag, "reducer action", error);
+    log.trace(tag, 'reducer action', error);
   }
 };
 
@@ -50,7 +50,7 @@ export const createSlice = (dispatch, slice, sliceActions, initialState) => {
 
   dispatch({
     slice: slice,
-    type: "CREATE_SLICE",
+    type: 'CREATE_SLICE',
     data: initialState,
   });
 };

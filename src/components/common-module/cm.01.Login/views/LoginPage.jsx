@@ -1,8 +1,8 @@
-import { Button, Col, Form, Input, Row } from "antd";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import CM01LoginDomain from "../domains/LoginDomain";
-import "./Login.less";
+import { Button, Col, Form, Input, Row } from 'antd';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import CM01LoginDomain from '../domains/LoginDomain';
+import './Login.less';
 
 export function Login() {
   const [form] = Form.useForm();
@@ -25,11 +25,11 @@ export function Login() {
         <Col span={24} className="full-screen bg bg-cover">
           <div
             style={{
-              color: "white",
-              fontWeight: "500",
+              color: 'white',
+              fontWeight: '500',
               fontSize: 25,
-              width: "100%",
-              textAlign: "center",
+              width: '100%',
+              textAlign: 'center',
               marginTop: 30,
               marginBottom: 70,
             }}
@@ -55,7 +55,7 @@ export function Login() {
                         {
                           required: true,
                           whitespace: true,
-                          message: "Tên đăng nhập không được phép để trống!",
+                          message: 'Tên đăng nhập không được phép để trống!',
                         },
                       ]}
                     >
@@ -69,7 +69,7 @@ export function Login() {
                         {
                           required: true,
                           whitespace: true,
-                          message: "Mật khẩu không được phép để trống!",
+                          message: 'Mật khẩu không được phép để trống!',
                         },
                       ]}
                     >
@@ -95,15 +95,15 @@ export function Login() {
           </Row>
           <div
             style={{
-              color: "white",
-              fontWeight: "500",
+              color: 'white',
+              fontWeight: '500',
               fontSize: 25,
-              width: "100%",
-              textAlign: "center",
+              width: '100%',
+              textAlign: 'center',
               marginTop: 30,
               marginBottom: 30,
-              float: "bottom",
-              position: "absolute",
+              float: 'bottom',
+              position: 'absolute',
               bottom: 0,
             }}
           >
