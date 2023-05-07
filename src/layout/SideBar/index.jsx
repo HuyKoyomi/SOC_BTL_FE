@@ -1,50 +1,58 @@
+import logo from '@assets/img/logo.webp';
 import { AdminMenu, UserMenu } from '@layout/MenuSideBar';
-import { Layout, Menu } from 'antd';
+import { Image, Layout, Menu } from 'antd';
+import MenuItem from 'antd/es/menu/MenuItem';
+import _ from 'lodash';
 import { useState } from 'react';
-import Scrollbars from 'react-custom-scrollbars';
 import { useNavigate } from 'react-router-dom';
-import './SideBar.less';
 const { Sider } = Layout;
 
 const LayoutSideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const onClick = (e) => {
-    navigate(e.key);
-  };
 
   return (
     <Sider
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
+      width={250}
+      theme="light"
     >
-      <div
-        style={{
-          height: 32,
-          margin: 16,
-          background: 'rgba(255, 255, 255, 0.2)',
-          color: '#fff',
-        }}
-      >
-        ICON
-      </div>
-      <Scrollbars>
-        <Menu
-          // theme={"light"}
-          theme={'dark'}
-          defaultSelectedKeys={
-            sessionStorage.getItem('role') == 'ADMIN'
-              ? AdminMenu[0].key
-              : UserMenu[0].key
-          }
-          mode="inline"
-          items={
-            sessionStorage.getItem('role') == 'ADMIN' ? AdminMenu : UserMenu
-          }
-          onClick={onClick}
-        />
-      </Scrollbars>
+      <Image
+        width={collapsed ? 70 : 150}
+        src={logo}
+        preview={false}
+        className="m-2"
+      />
+      <Menu theme={'light'} defaultSelectedKeys={0} mode="inline">
+        {sessionStorage.getItem('role') == 'ADMIN' &&
+          _.map(AdminMenu, (item, index) => (
+            <MenuItem
+              mode="inline"
+              key={index}
+              icon={item?.icon}
+              children={item?.children}
+              onClick={() => navigate(item?.path)}
+              className="text-base font-semibold my-3"
+            >
+              {item?.label}
+            </MenuItem>
+          ))}
+        {sessionStorage.getItem('role') == 'USER' &&
+          _.map(UserMenu, (item, index) => (
+            <MenuItem
+              mode="inline"
+              key={index}
+              icon={item?.icon}
+              children={item?.children}
+              onClick={() => navigate(item?.path)}
+              className="text-base font-semibold my-3"
+            >
+              {item?.label}
+            </MenuItem>
+          ))}
+      </Menu>
     </Sider>
   );
 };
