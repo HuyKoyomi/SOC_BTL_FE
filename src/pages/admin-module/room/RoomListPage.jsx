@@ -81,7 +81,10 @@ const RoomListPage = () => {
           <Col key={item.roomResponse.id} span={12} lg={8}>
             <Card hoverable className=" my-4">
               <div className="flex flex-col">
-                <img src={item.imageStoreLink[0].fileUrl} className="w-full]" />
+                <img
+                  src={item.imageStoreLink[0]?.fileUrl}
+                  className="w-full]"
+                />
 
                 <div className="info-wrap mt-3">
                   <div className=" ">
