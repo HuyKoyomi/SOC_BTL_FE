@@ -9,13 +9,13 @@ const AdminMenu = [
     icon: '',
   },
   {
-    key: '/room-type',
+    key: '/admin/room-type',
     icon: '',
     children: null,
     label: 'Quản lý loại phòng',
   },
   {
-    key: '/Quản lý phòng',
+    key: '/admin/room',
     icon: '',
     children: null,
     label: 'Quản lý phòng',
