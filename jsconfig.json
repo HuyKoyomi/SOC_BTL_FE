@@ -6,6 +6,7 @@
       "@assets/*": ["src/assets/*"],
       "@shared/*": ["src/shared/*"],
       "@core/*": ["src/core/*"],
+      "@store/*": ["src/store/*"],
       "@layout/*": ["src/layout/*"],
       "@containers/*": ["src/containers/*"],
       "@common/*": ["src/common/*"]

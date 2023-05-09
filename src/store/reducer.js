@@ -1,10 +1,6 @@
 // state
 const initialState = {
   roomTypeList: [],
-  hotelList: [],
-  currentHotel: {},
-  roomList: [],
-  // ...
 };
 
 // action type
@@ -13,17 +9,8 @@ const RoomTypeActionKeys = Object.freeze({
   SET_LIST: 'SET_LIST_ROOM_TYPE',
 });
 
-const RoomActionKeys = Object.freeze({
-  SET_LIST: 'SET_LIST_ROOM',
-});
-
 const setRoomTypeList = (payload) => ({
   type: RoomTypeActionKeys.SET_LIST,
-  payload,
-});
-
-const setRoomList = (payload) => ({
-  type: RoomActionKeys.SET_LIST,
   payload,
 });
 
@@ -31,29 +18,15 @@ const roomTypeActions = {
   setRoomTypeList,
 };
 
-const roomActions = {
-  setRoomList,
-};
-
-// const hotelActions = {
-
-// }
-
 // reducer
 const mainReducer = (state, action) => {
+  console.log('actions: ', action);
   let newState = {};
   switch (action.type) {
     case RoomTypeActionKeys.SET_LIST:
       newState = {
         ...state,
         roomTypeList: action.payload,
-      };
-      break;
-
-    case RoomActionKeys.SET_LIST:
-      newState = {
-        ...state,
-        roomList: action.payload,
       };
       break;
 
@@ -64,5 +37,5 @@ const mainReducer = (state, action) => {
   return newState;
 };
 
-export { initialState, RoomTypeActionKeys, roomTypeActions, roomActions };
+export { initialState, RoomTypeActionKeys, roomTypeActions };
 export default mainReducer;

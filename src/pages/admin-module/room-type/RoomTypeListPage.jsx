@@ -63,12 +63,23 @@ export default function RoomTypeListPage() {
     const getList = async (page = 0, pageSize = 1000000) => {
       try {
         common?.backdrop(true); // tạo spin quay
+        // const newParams = _.reduce(
+        //   params,
+        //   (result, value, key) => {
+        //     return _.assign(result, {
+        //       [key]: _.includes([NaN, null, undefined, ''], value)
+        //         ? null
+        //         : value,
+        //     });
+        //   },
+        //   {},
+        // );
+        // const url = `/search?page=${page}&size=${pageSize}`;
         const url = `/admin/room-type?page=${page}&size=${pageSize}`;
         const response = await axiosAPI.get(url);
         const { data } = response?.data || {};
         console.log('data: ', data);
         dispatch(roomTypeActions.setRoomTypeList(data));
-        // setData(data);
         common?.backdrop(false);
       } catch (error) {
         common?.backdrop(false);

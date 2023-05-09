@@ -1,4 +1,4 @@
-import { Layout, theme } from 'antd';
+import { Breadcrumb, Layout, theme } from "antd";
 
 const { Header } = Layout;
 export default function LayoutHeader() {
@@ -12,7 +12,7 @@ export default function LayoutHeader() {
         background: colorBgContainer,
       }}
     >
-      {/* <Breadcrumb
+      <Breadcrumb
         style={{
           margin: "16px 0",
         }}
@@ -20,7 +20,7 @@ export default function LayoutHeader() {
         <Breadcrumb.Item>Báo cáo</Breadcrumb.Item>
         <Breadcrumb.Item>Xem</Breadcrumb.Item>
         <Breadcrumb.Item>Bill</Breadcrumb.Item>
-      </Breadcrumb> */}
+      </Breadcrumb>
     </Header>
   );
 }
