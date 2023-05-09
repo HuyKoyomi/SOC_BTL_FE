@@ -21,7 +21,7 @@ const AdminMenu = [
     label: 'Quản lý phòng',
   },
   {
-    key: '/Quản lý người dùng',
+    key: '/admin/user',
     icon: '',
     children: null,
     label: 'Quản lý người dùng',

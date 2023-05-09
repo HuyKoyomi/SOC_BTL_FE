@@ -1,38 +1,47 @@
 // state
-const initialState = {
+export const initialState = {
   roomTypeList: [],
   hotelList: [],
   currentHotel: {},
   roomList: [],
+  userList: [],
+
   // ...
 };
 
 // action type
-const RoomTypeActionKeys = Object.freeze({
+export const RoomTypeActionKeys = Object.freeze({
   GET_LIST: 'GET_LIST_ROOM_TYPE',
   SET_LIST: 'SET_LIST_ROOM_TYPE',
 });
 
-const RoomActionKeys = Object.freeze({
+export const RoomActionKeys = Object.freeze({
   SET_LIST: 'SET_LIST_ROOM',
 });
 
-const setRoomTypeList = (payload) => ({
-  type: RoomTypeActionKeys.SET_LIST,
-  payload,
+export const UserActionKeys = Object.freeze({
+  SET_LIST: 'SET_LIST_USER',
 });
 
-const setRoomList = (payload) => ({
-  type: RoomActionKeys.SET_LIST,
-  payload,
-});
-
-const roomTypeActions = {
-  setRoomTypeList,
+export const roomTypeActions = {
+  setRoomTypeList: (payload) => ({
+    type: RoomTypeActionKeys.SET_LIST,
+    payload,
+  }),
 };
 
-const roomActions = {
-  setRoomList,
+export const roomActions = {
+  setRoomList: (payload) => ({
+    type: RoomActionKeys.SET_LIST,
+    payload,
+  }),
+};
+
+export const userActions = {
+  setUserList: (payload) => ({
+    type: UserActionKeys.SET_LIST,
+    payload,
+  }),
 };
 
 // const hotelActions = {
@@ -57,6 +66,13 @@ const mainReducer = (state, action) => {
       };
       break;
 
+    case UserActionKeys.SET_LIST:
+      newState = {
+        ...state,
+        userList: action.payload,
+      };
+      break;
+
     default:
       console.log('Invalid actions');
   }
@@ -64,5 +80,4 @@ const mainReducer = (state, action) => {
   return newState;
 };
 
-export { initialState, RoomTypeActionKeys, roomTypeActions, roomActions };
 export default mainReducer;
