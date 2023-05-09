@@ -5,6 +5,7 @@ import LoginService from '../services/LoginService';
 import UseCommon from '@core/hooks/UseCommon';
 import useAxiosAPI from '@core/hooks/UseAxiosAPI';
 import { ROLE_CONVERT } from '../views/Contant';
+import axios from 'axios';
 
 export function CM01LoginDomain() {
   const [context, contextService] = LoginService();
@@ -74,10 +75,38 @@ export function CM01LoginDomain() {
     }
   }
   //------------------- navigation ----------------------
-
+  async function regist({ name, email, password, role }) {
+    try {
+      common?.backdrop(true);
+      const url = `http://localhost:8080/auth/signup`;
+      let dataIp = {
+        name: name,
+        email: email,
+        password: password,
+        role: role,
+      };
+      await axios({
+        method: 'post',
+        url: url,
+        data: dataIp,
+      }).then((res) => {
+        console.log(res.data, 'res');
+        if (res?.data.success) {
+          message.success('Đăng ký thành công');
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      common?.backdrop(false);
+    }
+    return true;
+  }
   const domainInterface = useRef({
     initDomain,
     getLogin,
+    regist,
   });
   return [context, domainInterface.current];
 }
