@@ -47,12 +47,12 @@ const AdminMenu = [
 const UserMenu = [
   {
     path: '/user/home',
-    label: 'Chức năng thuê khách sạn online',
+    label: 'Thuê khách sạn online',
     icon: '',
   },
   {
-    path: '/user/check-in-out',
-    label: 'Check-in check-out phòng bản thân',
+    path: '/user/bookroom',
+    label: 'Danh sách phòng đã đặt',
     icon: '',
   },
 ];

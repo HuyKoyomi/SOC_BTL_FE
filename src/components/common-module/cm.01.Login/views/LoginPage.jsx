@@ -6,12 +6,10 @@ import {
   Input,
   Modal,
   Row,
-  Space,
   Typography,
   message,
 } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import CM01LoginDomain from '../domains/LoginDomain';
 import './Login.less';
 

@@ -56,6 +56,7 @@ export function CM01LoginDomain() {
       let { data, code } = response?.data || {};
       if (code == 200 && data) {
         sessionStorage.setItem('role', data?.role);
+        sessionStorage.setItem('userId', data?.id);
         switch (data?.role) {
           case ROLE_CONVERT.USER:
             navigate('/user/home');
