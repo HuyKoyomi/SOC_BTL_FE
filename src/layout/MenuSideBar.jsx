@@ -13,12 +13,12 @@ const AdminMenu = [
     icon: <AiOutlineHome size={20} />,
   },
   {
-    path: 'admin/room-type',
+    path: '/admin/room-type',
     icon: <MdOutlineBedroomParent size={20} />,
     label: 'Quản lý loại phòng',
   },
   {
-    path: 'admin/room',
+    path: '/admin/room',
     icon: <MdOutlineBedroomParent size={20} />,
     label: 'Quản lý phòng',
   },
@@ -26,16 +26,6 @@ const AdminMenu = [
     path: 'admin/Quản lý người dùng',
     icon: <AiOutlineUser size={20} />,
     label: 'Quản lý người dùng',
-  },
-  {
-    path: '/Check-in check-out',
-    icon: <RiCalendarCheckLine size={20} />,
-    label: 'Check-in check-out',
-  },
-  {
-    path: '/Đặt phòng trực tiếp',
-    icon: <BiPhoneCall size={20} />,
-    label: 'Đặt phòng trực tiếp',
   },
   {
     path: '/service',
