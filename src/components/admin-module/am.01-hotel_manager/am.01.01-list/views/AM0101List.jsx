@@ -109,7 +109,7 @@ export default function AM0101List({ context, domain }) {
         </Space>
       }
     >
-      <Table columns={columns} dataSource={data} />
+      <Table rowKey="id" columns={columns} dataSource={data} />
     </Card>
   );
 }
