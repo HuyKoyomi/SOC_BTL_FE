@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Form, Modal, Upload } from 'antd';
+import { Form, Modal, Row, Upload } from 'antd';
 import { useState } from 'react';
 
 const getBase64 = (file) =>
@@ -41,8 +41,12 @@ const UploadImg = ({ name, fileList, setFileList, mode }) => {
     </div>
   );
   return (
-    <>
-      <Form.Item label="Upload file ảnh" required shouldUpdate>
+    <Row className="flex justify-center">
+      <Form.Item
+        // label="Upload file ảnh"
+        required
+        shouldUpdate
+      >
         {({ getFieldValue, setFieldsValue }) => {
           return (
             <Form.Item name={name} valuePropName={name}>
@@ -82,7 +86,7 @@ const UploadImg = ({ name, fileList, setFileList, mode }) => {
           src={previewImage}
         />
       </Modal>
-    </>
+    </Row>
   );
 };
 export default UploadImg;
