@@ -5,7 +5,7 @@ export const initialState = {
   currentHotel: {},
   roomList: [],
   userList: [],
-
+  selectedUser: {},
   // ...
 };
 

@@ -3,12 +3,13 @@ import useAxiosAPI from '@core/hooks/UseAxiosAPI';
 import UseCommon from '@core/hooks/UseCommon';
 import { Button, Card, Input, Space, Table, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMainStore } from 'src/store/hook';
 import { userActions } from 'src/store/reducer';
 
 const UserListPage = () => {
   const common = UseCommon();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [{ userList }, dispatch] = useMainStore();
   const [data, setData] = useState([]);
   const axiosAPI = useAxiosAPI();
@@ -52,8 +53,14 @@ const UserListPage = () => {
       key: 'action',
       fixed: 'right',
       width: 150,
-      render: () => (
-        <Tooltip title="Xem chi tiết" color="#1677ff" onClick={() => {}}>
+      render: (_, record) => (
+        <Tooltip
+          title="Xem chi tiết"
+          color="#1677ff"
+          onClick={() => {
+            navigate(`/admin/user/${(_, record.id)}`);
+          }}
+        >
           <a style={{ color: '#1677ff' }}>
             <EyeOutlined />
           </a>
@@ -88,11 +95,11 @@ const UserListPage = () => {
 
   return (
     <Card
-      title="Quản lý khách sạn"
+      title="Quản lý người dùng"
       extra={
         <Space className="w-[800]">
           <Input
-            placeholder="Tìm kiếm theo tên khách sạn"
+            placeholder="Tìm kiếm theo tên người dùng"
             allowClear
             prefix={<SearchOutlined />}
             className="w-[600]"

@@ -35,6 +35,8 @@ export default function AM0102List({ context, domain }) {
     }
   }, [dataDetail]);
 
+  console.log('fileList', fileList);
+
   const required = {
     required: true,
     message: 'Trường thông tin không được phép để trống',
