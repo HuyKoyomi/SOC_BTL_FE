@@ -9,7 +9,7 @@ const getBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
-const UploadImg = ({ name, fileList, setFileList, mode }) => {
+const UploadImg = ({ name, fileList, setFileList, mode, disabled }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -58,6 +58,7 @@ const UploadImg = ({ name, fileList, setFileList, mode }) => {
               <Upload
                 // disabled={mode == 'create' ? false : true}
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                disabled={disabled}
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}

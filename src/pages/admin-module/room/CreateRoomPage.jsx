@@ -54,7 +54,6 @@ const CreateRoomPage = () => {
     try {
       common?.backdrop(true); // tạo spin quay
       let params = await form.getFieldsValue(true);
-      console.log('params', params);
       await form.validateFields();
 
       const formData = new FormData();

@@ -66,7 +66,6 @@ export default function RoomTypeListPage() {
         const url = `/admin/room-type?page=${page}&size=${pageSize}`;
         const response = await axiosAPI.get(url);
         const { data } = response?.data || {};
-        console.log('data: ', data);
         dispatch(roomTypeActions.setRoomTypeList(data));
         // setData(data);
         common?.backdrop(false);
@@ -104,7 +103,7 @@ export default function RoomTypeListPage() {
         </Space>
       }
     >
-      <Table columns={columns} dataSource={data} key="id" />
+      <Table rowKey="id" columns={columns} dataSource={data} key="id" />
     </Card>
   );
 }

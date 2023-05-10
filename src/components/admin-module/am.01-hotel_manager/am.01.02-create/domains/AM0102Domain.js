@@ -62,6 +62,8 @@ export function AM0102Domain() {
       const formData = new FormData();
       formData.append('hotelRequest', JSON.stringify(dataTMP));
       let listFile = params?.files || [];
+      console.log('listFile: ', listFile);
+
       if (listFile && listFile?.length !== 0) {
         _.map(listFile, (item) => {
           formData.append('files', item);
@@ -69,6 +71,7 @@ export function AM0102Domain() {
       } else {
         formData.append('files', null);
       }
+      console.log('form: ', formData);
       const url = `/admin/hotel/create`;
       const response = await axiosAPI.post(url, formData, {
         //sử dụng trong TH dùng form-data + multipart
