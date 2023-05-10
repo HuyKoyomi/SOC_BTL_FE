@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { STATUS_RENDER } from './Contant';
+import { formatCurrency } from '@common/Utils';
 
 export default function AM0201List({ context, domain }) {
   const { listDataTable, listDataCount } = context || {};
@@ -64,11 +65,20 @@ export default function AM0201List({ context, domain }) {
                     <div className="info-wrap mt-3">
                       <div className=" ">
                         <div>
-                          {`Room ${item?.roomResponse?.numberRoom} - Floor ${item?.roomResponse?.floor}`}
+                          {`Phòng ${item?.roomResponse?.numberRoom} - Tầng ${item?.roomResponse?.floor}`}
                         </div>
-                        <div>{`Price: ${item?.roomResponse?.cost}VND`}</div>
                         <div>
-                          {`Type: ${item?.roomResponse?.roomType[0].nameRoomType}`}
+                          {`Giá phòng: `}
+                          <span
+                            className="font-bold"
+                            style={{ color: '#2EB553' }}
+                          >
+                            {formatCurrency(item?.roomResponse?.cost)}
+                          </span>
+                          {` VND`}
+                        </div>
+                        <div>
+                          {`Loại phòng: ${item?.roomResponse?.roomType[0].nameRoomType}`}
                         </div>
                         <div>
                           {`Trạng thái: `}

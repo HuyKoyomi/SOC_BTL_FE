@@ -1,3 +1,5 @@
+import { formatCurrency } from '@common/Utils';
+import { STATUS_RENDER } from '@components/admin-module/am.02-room_manger/am.0201-list/views/Contant';
 import { Card, Col, Modal, Row, Space, Typography } from 'antd';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
@@ -36,11 +38,24 @@ export default function UM0101List({ context, domain }) {
                     <div className="info-wrap mt-3">
                       <div className=" ">
                         <div>
-                          {`Room ${item?.roomResponse?.numberRoom} - Floor ${item?.roomResponse?.floor}`}
+                          {`Phòng ${item?.roomResponse?.numberRoom} - Tầng ${item?.roomResponse?.floor}`}
                         </div>
-                        <div>{`Price: ${item?.roomResponse?.cost}VND`}</div>
                         <div>
-                          {`Type: ${item?.roomResponse?.roomType[0].nameRoomType}`}
+                          {`Giá phòng: `}
+                          <span
+                            className="font-bold"
+                            style={{ color: '#2EB553' }}
+                          >
+                            {formatCurrency(item?.roomResponse?.cost)}
+                          </span>
+                          {` VND`}
+                        </div>
+                        <div>
+                          {`Loại phòng: ${item?.roomResponse?.roomType[0].nameRoomType}`}
+                        </div>
+                        <div>
+                          {`Trạng thái: `}
+                          {STATUS_RENDER(item?.roomResponse?.status)}
                         </div>
                       </div>
                     </div>
