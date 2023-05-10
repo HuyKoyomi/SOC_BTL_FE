@@ -1,12 +1,10 @@
 import useAxiosAPI from '@core/hooks/UseAxiosAPI';
 import UseCommon from '@core/hooks/UseCommon';
-import _ from 'lodash';
+import { message } from 'antd';
+import dayjs from 'dayjs';
 import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UM0102Service from '../services/UM0102Service';
-import { message } from 'antd';
-import dayjs from 'dayjs';
-import moment from 'moment/moment';
 
 export function UM0102Domain() {
   const { mode, id } = useParams();

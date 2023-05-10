@@ -23,12 +23,12 @@ const AdminMenu = [
     label: 'Quản lý phòng',
   },
   {
-    path: 'admin/Quản lý người dùng',
+    path: '/admin/user',
     icon: <AiOutlineUser size={20} />,
     label: 'Quản lý người dùng',
   },
   {
-    path: '/service',
+    path: '/admin/service',
     icon: <BiDrink size={20} />,
     children: null,
     label: 'Quản lý dịch vụ',

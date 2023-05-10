@@ -3,6 +3,7 @@ import { Button, Card, Col, Input, Modal, Row, Space, Typography } from 'antd';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { STATUS_RENDER } from './Contant';
 
 export default function AM0201List({ context, domain }) {
   const { listDataTable, listDataCount } = context || {};
@@ -68,6 +69,10 @@ export default function AM0201List({ context, domain }) {
                         <div>{`Price: ${item?.roomResponse?.cost}VND`}</div>
                         <div>
                           {`Type: ${item?.roomResponse?.roomType[0].nameRoomType}`}
+                        </div>
+                        <div>
+                          {`Trạng thái: `}
+                          {STATUS_RENDER(item?.roomResponse?.status)}
                         </div>
                       </div>
                     </div>

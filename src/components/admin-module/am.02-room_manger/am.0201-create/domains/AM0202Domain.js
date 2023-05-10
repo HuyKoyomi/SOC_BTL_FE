@@ -1,10 +1,11 @@
 import useAxiosAPI from '@core/hooks/UseAxiosAPI';
 import UseCommon from '@core/hooks/UseCommon';
+import { message } from 'antd';
+import dayjs from 'dayjs';
 import _ from 'lodash';
 import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import AM0202Service from '../services/AM0202Service';
-import { message } from 'antd';
 
 export function AM0202Domain() {
   const { mode, id } = useParams();
@@ -15,6 +16,7 @@ export function AM0202Domain() {
       listHotel: [],
       listRoomType: [],
       mode: mode,
+      totalCost: 0,
     } || context,
   );
   const navigate = useNavigate();
@@ -139,6 +141,61 @@ export function AM0202Domain() {
       common?.backdrop(false);
     }
   };
+  const checkin = async (params) => {
+    try {
+      common?.backdrop(true); // tạo spin quay
+      let checkInTime = new Date(
+        dayjs(params?.checkInTime).format('YYYY-MM-DD HH:mm:ss'),
+      ).toISOString();
+      let checkOutTime = new Date(
+        dayjs(params?.checkOutTime).format('YYYY-MM-DD HH:mm:ss'),
+      ).toISOString();
+
+      let dataTMP = {
+        rentalPeriod: params?.rentalPeriod,
+        userNameDirectBooking: params?.userNameDirectBooking,
+        roomId: params?.roomId,
+        // userId: params?.userId,
+        directBooking: params?.directBooking,
+        checkInTime: checkInTime,
+        checkOutTime: checkOutTime,
+        deposit: params?.deposit,
+      };
+      console.log('dataTMP', dataTMP);
+      const url = `/admin/booking/checkIn`;
+      const response = await axiosAPI.post(url, dataTMP);
+      if (response?.data?.code == 200) {
+        message.success('Đặt phòng thành công');
+        goToHomePage();
+      } else {
+        message.error('Đặt phòng thất bại');
+      }
+    } catch (error) {
+      console.log(error);
+      message.error('Cập nhật thất bại');
+    } finally {
+      common?.backdrop(false);
+    }
+  };
+  const checkout = async (params) => {
+    try {
+      common?.backdrop(true); // tạo spin quay
+      const url = `/admin/booking/checkOut/${id}`;
+      const response = await axiosAPI.get(url);
+      if (response?.data?.code == 200) {
+        message.success('Check out thành công');
+        contextRef.current.totalCost = response?.data?.data?.totalCost;
+        await contextService.updateContext(contextRef.current);
+      } else {
+        message.error('Check out thất bại');
+      }
+    } catch (error) {
+      console.log(error);
+      message.error('Cập nhật thất bại');
+    } finally {
+      common?.backdrop(false);
+    }
+  };
   const edit = async (params) => {
     try {
       common?.backdrop(true); // tạo spin quay
@@ -209,6 +266,8 @@ export function AM0202Domain() {
     goBack,
     create,
     edit,
+    checkin,
+    checkout,
   });
   return [context, domainInterface.current];
 }
