@@ -59,10 +59,10 @@ export function AM0201Domain() {
   };
   //------------------- navigation ----------------------
   const goToViewPage = (id) => {
-    navigate(`/admin/home/view/${id}`);
+    navigate(`/admin/room/view/${id}`);
   };
   const goToCreatePage = () => {
-    navigate(`/admin/home/${'create'}/${null}`);
+    navigate(`/admin/room/${'create'}/${null}`);
   };
 
   const domainInterface = useRef({

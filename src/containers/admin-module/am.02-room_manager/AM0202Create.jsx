@@ -1,5 +1,5 @@
-import { AM0102Content } from "@components/admin-module/am.01-hotel_manager/am.01.02-create/views/AM0102Content";
+import { AM0202Content } from '@components/admin-module/am.02-room_manger/am.0201-create/views/AM0202Content';
 
 export default function AM0102Create() {
-  return <AM0102Content />;
+  return <AM0202Content />;
 }
